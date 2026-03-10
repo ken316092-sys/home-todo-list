@@ -513,7 +513,7 @@
     document.getElementById('dateInput').valueAsDate = new Date();
 
     // 監聽 Firestore 實時更新
-    const q = query(collection(db, 'users', name, 'items'), orderBy('created', 'desc'));
+    const q = query(collection(db, 'shared', 'todo', 'items'), orderBy('created', 'desc'));
     unsubscribe = onSnapshot(q, (snapshot) => {
       items = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
       render();
@@ -548,11 +548,12 @@
     const btn = document.getElementById('addBtn');
     btn.disabled = true;
 
-    await addDoc(collection(db, 'users', currentUser, 'items'), {
+    await addDoc(collection(db, 'shared', 'todo', 'items'), {
       title, category: cat,
       date: date || null,
       time: time || null,
       done: false,
+      addedBy: currentUser,
       created: serverTimestamp()
     });
 
@@ -565,13 +566,13 @@
   window.toggleDone = async function(id) {
     const item = items.find(i => i.id === id);
     if (item) {
-      await updateDoc(doc(db, 'users', currentUser, 'items', id), { done: !item.done });
+      await updateDoc(doc(db, 'shared', 'todo', 'items', id), { done: !item.done });
     }
   };
 
   window.deleteItem = async function(id) {
     if (timers[id]) { clearTimeout(timers[id]); delete timers[id]; }
-    await deleteDoc(doc(db, 'users', currentUser, 'items', id));
+    await deleteDoc(doc(db, 'shared', 'todo', 'items', id));
   };
 
   window.switchTab = function(tab, btn) {
@@ -610,6 +611,7 @@
           <div class="item-title">${escHtml(item.title)}</div>
           <div class="item-meta">
             <span class="tag category">${escHtml(item.category)}</span>
+            ${item.addedBy ? `<span class="tag" style="background:#f2f2f7;color:#3a3a3c">${item.addedBy === 'Ken' ? '👨' : '👩'} ${item.addedBy}</span>` : ''}
             ${item.date && item.time ? `<span class="tag time">⏰ ${item.date} ${item.time}</span><span class="tag notify">提前30分鐘通知</span>` : item.date ? `<span class="tag time">📅 ${item.date}</span>` : ''}
           </div>
         </div>
