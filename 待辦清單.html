@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>待辦清單</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      background: #f2f2f7;
+      color: #1c1c1e;
+      min-height: 100vh;
+    }
+
+    /* ── 用戶選擇頁面 ── */
+    #userScreen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 32px 24px;
+    }
+
+    #userScreen h1 {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    #userScreen p {
+      color: #8e8e93;
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    .user-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .user-btn {
+      padding: 20px;
+      border: none;
+      border-radius: 18px;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.1s;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .user-btn:active { transform: scale(0.97); opacity: 0.85; }
+
+    .user-btn.ken {
+      background: #007aff;
+      color: #fff;
+    }
+
+    .user-btn.vanessa {
+      background: #ff2d55;
+      color: #fff;
+    }
+
+    .user-btn .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    /* ── 主頁面 ── */
+    #mainScreen { display: none; }
+
+    header {
+      background: #fff;
+      padding: 20px 16px 12px;
+      border-bottom: 1px solid #e5e5ea;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+
+    .header-left h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1c1c1e;
+    }
+
+    .header-left p {
+      font-size: 13px;
+      color: #8e8e93;
+      margin-top: 2px;
+    }
+
+    .switch-user-btn {
+      background: #f2f2f7;
+      border: none;
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #007aff;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .switch-user-btn:active { opacity: 0.7; }
+
+    .add-section {
+      background: #fff;
+      margin: 16px;
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .add-section h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #3a3a3c;
+      margin-bottom: 12px;
+    }
+
+    .field { margin-bottom: 10px; }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: #8e8e93;
+      margin-bottom: 4px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .field input, .field select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1px solid #d1d1d6;
+      border-radius: 10px;
+      font-size: 16px;
+      background: #f9f9fb;
+      color: #1c1c1e;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .field input:focus, .field select:focus {
+      border-color: #007aff;
+      background: #fff;
+    }
+
+    .row { display: flex; gap: 10px; }
+    .row .field { flex: 1; }
+
+    button.add-btn {
+      width: 100%;
+      padding: 13px;
+      background: #007aff;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      margin-top: 4px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    button.add-btn:active { opacity: 0.75; }
+
+    .notify-btn {
+      width: 100%;
+      padding: 11px;
+      background: #34c759;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 10px;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    .notify-btn:active { opacity: 0.75; }
+
+    .notify-status {
+      font-size: 12px;
+      color: #8e8e93;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    .list-section { margin: 0 16px 30px; }
+
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding: 0 4px;
+    }
+
+    .list-header h2 { font-size: 17px; font-weight: 600; }
+    .list-header span { font-size: 13px; color: #8e8e93; }
+
+    .empty {
+      text-align: center;
+      color: #aeaeb2;
+      padding: 40px 20px;
+      font-size: 15px;
+    }
+
+    .item {
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      transition: opacity 0.2s;
+    }
+
+    .item.done { opacity: 0.5; }
+    .item.done .item-title { text-decoration: line-through; color: #8e8e93; }
+
+    .item-check {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid #d1d1d6;
+      background: #fff;
+      flex-shrink: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      transition: all 0.15s;
+    }
+
+    .item.done .item-check { background: #34c759; border-color: #34c759; }
+    .item-check svg { display: none; }
+    .item.done .item-check svg { display: block; }
+
+    .item-body { flex: 1; min-width: 0; }
+    .item-title { font-size: 16px; font-weight: 500; word-break: break-word; }
+
+    .item-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
+
+    .tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+    .tag.category { background: #e5f0ff; color: #007aff; }
+    .tag.time { background: #fff3e0; color: #e65100; }
+    .tag.notify { background: #e8f5e9; color: #2e7d32; }
+
+    .item-delete {
+      background: none;
+      border: none;
+      color: #aeaeb2;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0 0 0 4px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .item-delete:active { color: #ff3b30; }
+
+    .tabs { display: flex; gap: 8px; margin: 0 16px 14px; }
+
+    .tab {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      border-radius: 10px;
+      background: #e5e5ea;
+      color: #3a3a3c;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .tab.active { background: #007aff; color: #fff; }
+
+    /* 用戶主題色 */
+    body.user-ken button.add-btn,
+    body.user-ken .tab.active { background: #007aff; }
+
+    body.user-vanessa button.add-btn,
+    body.user-vanessa .tab.active { background: #ff2d55; }
+
+    body.user-vanessa .field input:focus,
+    body.user-vanessa .field select:focus { border-color: #ff2d55; }
+  </style>
+</head>
+<body>
+
+<!-- 用戶選擇頁面 -->
+<div id="userScreen">
+  <h1>📋 待辦清單</h1>
+  <p>請選擇你係邊位</p>
+  <div class="user-buttons">
+    <button class="user-btn ken" onclick="selectUser('Ken')">
+      <div class="avatar">👨</div>
+      Ken
+    </button>
+    <button class="user-btn vanessa" onclick="selectUser('Vanessa')">
+      <div class="avatar">👩</div>
+      Vanessa
+    </button>
+  </div>
+</div>
+
+<!-- 主頁面 -->
+<div id="mainScreen">
+  <header>
+    <div class="header-left">
+      <h1 id="headerTitle">📋 待辦清單</h1>
+      <p>買嘢 · 事項 · 提醒</p>
+    </div>
+    <button class="switch-user-btn" onclick="switchUser()">切換用戶</button>
+  </header>
+
+  <div class="add-section">
+    <h2>新增項目</h2>
+
+    <div class="field">
+      <label>標題</label>
+      <input type="text" id="titleInput" placeholder="例：買牛奶、交功課…" />
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>分類</label>
+        <select id="catInput">
+          <option value="購物">🛒 購物</option>
+          <option value="功課">📚 功課</option>
+          <option value="工作">💼 工作</option>
+          <option value="其他">📌 其他</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>提醒日期</label>
+        <input type="date" id="dateInput" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label>提醒時間（會喺前30分鐘通知）</label>
+      <input type="time" id="timeInput" />
+    </div>
+
+    <button class="add-btn" onclick="addItem()">＋ 加入清單</button>
+
+    <button class="notify-btn" onclick="requestNotify()">🔔 開啟通知權限</button>
+    <div class="notify-status" id="notifyStatus">狀態：未知</div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('pending', this)">待辦</button>
+    <button class="tab" onclick="switchTab('done', this)">已完成</button>
+  </div>
+
+  <div class="list-section">
+    <div class="list-header">
+      <h2 id="tabTitle">待辦事項</h2>
+      <span id="countLabel"></span>
+    </div>
+    <div id="itemList"></div>
+  </div>
+</div>
+
+<script>
+  let currentUser = null;
+  let items = [];
+  let currentTab = 'pending';
+  let timers = {};
+
+  function getStorageKey() {
+    return 'todoItems_' + currentUser;
+  }
+
+  function save() {
+    localStorage.setItem(getStorageKey(), JSON.stringify(items));
+  }
+
+  function selectUser(name) {
+    currentUser = name;
+    items = JSON.parse(localStorage.getItem(getStorageKey()) || '[]');
+
+    document.getElementById('userScreen').style.display = 'none';
+    document.getElementById('mainScreen').style.display = 'block';
+    document.getElementById('headerTitle').textContent = '📋 ' + name + ' 嘅清單';
+
+    document.body.className = 'user-' + name.toLowerCase();
+
+    updateNotifyStatus();
+    rescheduleAll();
+    render();
+    document.getElementById('dateInput').valueAsDate = new Date();
+  }
+
+  function switchUser() {
+    // 清除計時器
+    Object.values(timers).forEach(t => clearTimeout(t));
+    timers = {};
+
+    currentUser = null;
+    items = [];
+    currentTab = 'pending';
+    document.body.className = '';
+
+    document.getElementById('mainScreen').style.display = 'none';
+    document.getElementById('userScreen').style.display = 'flex';
+
+    // 重置 tab
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      t.classList.toggle('active', i === 0);
+    });
+    document.getElementById('tabTitle').textContent = '待辦事項';
+  }
+
+  function addItem() {
+    const title = document.getElementById('titleInput').value.trim();
+    const cat = document.getElementById('catInput').value;
+    const date = document.getElementById('dateInput').value;
+    const time = document.getElementById('timeInput').value;
+
+    if (!title) { alert('請輸入標題！'); return; }
+
+    const item = {
+      id: Date.now(),
+      title,
+      category: cat,
+      date: date || null,
+      time: time || null,
+      done: false,
+      created: new Date().toISOString()
+    };
+
+    items.unshift(item);
+    save();
+    render();
+    scheduleNotification(item);
+
+    document.getElementById('titleInput').value = '';
+    document.getElementById('dateInput').value = '';
+    document.getElementById('timeInput').value = '';
+  }
+
+  function toggleDone(id) {
+    const item = items.find(i => i.id === id);
+    if (item) { item.done = !item.done; save(); render(); }
+  }
+
+  function deleteItem(id) {
+    if (timers[id]) { clearTimeout(timers[id]); delete timers[id]; }
+    items = items.filter(i => i.id !== id);
+    save();
+    render();
+  }
+
+  function switchTab(tab, btn) {
+    currentTab = tab;
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tabTitle').textContent = tab === 'pending' ? '待辦事項' : '已完成';
+    render();
+  }
+
+  function render() {
+    const list = document.getElementById('itemList');
+    const filtered = items.filter(i => currentTab === 'pending' ? !i.done : i.done);
+    document.getElementById('countLabel').textContent = filtered.length + ' 項';
+
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="empty">' + (currentTab === 'pending' ? '暫時冇待辦事項 🎉' : '未完成任何項目') + '</div>';
+      return;
+    }
+
+    list.innerHTML = filtered.map(item => `
+      <div class="item ${item.done ? 'done' : ''}" id="item-${item.id}">
+        <div class="item-check" onclick="toggleDone(${item.id})">
+          <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
+            <path d="M1 5L5 9L12 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="item-body">
+          <div class="item-title">${escHtml(item.title)}</div>
+          <div class="item-meta">
+            <span class="tag category">${escHtml(item.category)}</span>
+            ${item.date && item.time ? `<span class="tag time">⏰ ${item.date} ${item.time}</span><span class="tag notify">提前30分鐘通知</span>` : item.date ? `<span class="tag time">📅 ${item.date}</span>` : ''}
+          </div>
+        </div>
+        <button class="item-delete" onclick="deleteItem(${item.id})">×</button>
+      </div>
+    `).join('');
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function scheduleNotification(item) {
+    if (!item.date || !item.time) return;
+    if (Notification.permission !== 'granted') return;
+
+    const eventTime = new Date(item.date + 'T' + item.time);
+    const notifyTime = new Date(eventTime.getTime() - 30 * 60 * 1000);
+    const delay = notifyTime - new Date();
+    if (delay <= 0) return;
+
+    if (timers[item.id]) clearTimeout(timers[item.id]);
+    timers[item.id] = setTimeout(() => {
+      new Notification('⏰ ' + currentUser + ' 嘅提醒', {
+        body: `「${item.title}」將喺30分鐘後到期！`
+      });
+    }, delay);
+  }
+
+  function rescheduleAll() {
+    items.forEach(item => { if (!item.done) scheduleNotification(item); });
+  }
+
+  async function requestNotify() {
+    if (!('Notification' in window)) {
+      document.getElementById('notifyStatus').textContent = '狀態：你嘅瀏覽器唔支援通知';
+      return;
+    }
+    const result = await Notification.requestPermission();
+    updateNotifyStatus();
+    if (result === 'granted') rescheduleAll();
+  }
+
+  function updateNotifyStatus() {
+    const el = document.getElementById('notifyStatus');
+    if (!('Notification' in window)) {
+      el.textContent = '狀態：唔支援通知';
+    } else if (Notification.permission === 'granted') {
+      el.textContent = '狀態：✅ 通知已開啟';
+    } else if (Notification.permission === 'denied') {
+      el.textContent = '狀態：❌ 通知已被拒絕（請喺設定入面手動開啟）';
+    } else {
+      el.textContent = '狀態：請撳上面按鈕開啟通知';
+    }
+  }
+</script>
+
+</body>
+</html>
