@@ -16,6 +16,75 @@
       min-height: 100vh;
     }
 
+    /* ── 用戶選擇頁面 ── */
+    #userScreen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 32px 24px;
+    }
+
+    #userScreen h1 {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    #userScreen p {
+      color: #8e8e93;
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+
+    .user-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .user-btn {
+      padding: 20px;
+      border: none;
+      border-radius: 18px;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.1s;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .user-btn:active { transform: scale(0.97); opacity: 0.85; }
+
+    .user-btn.ken {
+      background: #007aff;
+      color: #fff;
+    }
+
+    .user-btn.vanessa {
+      background: #ff2d55;
+      color: #fff;
+    }
+
+    .user-btn .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    /* ── 主頁面 ── */
+    #mainScreen { display: none; }
+
     header {
       background: #fff;
       padding: 20px 16px 12px;
@@ -23,19 +92,36 @@
       position: sticky;
       top: 0;
       z-index: 10;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
     }
 
-    header h1 {
-      font-size: 28px;
+    .header-left h1 {
+      font-size: 26px;
       font-weight: 700;
       color: #1c1c1e;
     }
 
-    header p {
+    .header-left p {
       font-size: 13px;
       color: #8e8e93;
       margin-top: 2px;
     }
+
+    .switch-user-btn {
+      background: #f2f2f7;
+      border: none;
+      border-radius: 10px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #007aff;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .switch-user-btn:active { opacity: 0.7; }
 
     .add-section {
       background: #fff;
@@ -52,9 +138,7 @@
       margin-bottom: 12px;
     }
 
-    .field {
-      margin-bottom: 10px;
-    }
+    .field { margin-bottom: 10px; }
 
     .field label {
       display: block;
@@ -83,14 +167,8 @@
       background: #fff;
     }
 
-    .row {
-      display: flex;
-      gap: 10px;
-    }
-
-    .row .field {
-      flex: 1;
-    }
+    .row { display: flex; gap: 10px; }
+    .row .field { flex: 1; }
 
     button.add-btn {
       width: 100%;
@@ -131,9 +209,7 @@
       margin-top: 6px;
     }
 
-    .list-section {
-      margin: 0 16px 30px;
-    }
+    .list-section { margin: 0 16px 30px; }
 
     .list-header {
       display: flex;
@@ -143,15 +219,8 @@
       padding: 0 4px;
     }
 
-    .list-header h2 {
-      font-size: 17px;
-      font-weight: 600;
-    }
-
-    .list-header span {
-      font-size: 13px;
-      color: #8e8e93;
-    }
+    .list-header h2 { font-size: 17px; font-weight: 600; }
+    .list-header span { font-size: 13px; color: #8e8e93; }
 
     .empty {
       text-align: center;
@@ -172,14 +241,8 @@
       transition: opacity 0.2s;
     }
 
-    .item.done {
-      opacity: 0.5;
-    }
-
-    .item.done .item-title {
-      text-decoration: line-through;
-      color: #8e8e93;
-    }
+    .item.done { opacity: 0.5; }
+    .item.done .item-title { text-decoration: line-through; color: #8e8e93; }
 
     .item-check {
       width: 24px;
@@ -196,58 +259,19 @@
       transition: all 0.15s;
     }
 
-    .item.done .item-check {
-      background: #34c759;
-      border-color: #34c759;
-    }
+    .item.done .item-check { background: #34c759; border-color: #34c759; }
+    .item-check svg { display: none; }
+    .item.done .item-check svg { display: block; }
 
-    .item-check svg {
-      display: none;
-    }
+    .item-body { flex: 1; min-width: 0; }
+    .item-title { font-size: 16px; font-weight: 500; word-break: break-word; }
 
-    .item.done .item-check svg {
-      display: block;
-    }
+    .item-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
 
-    .item-body {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .item-title {
-      font-size: 16px;
-      font-weight: 500;
-      word-break: break-word;
-    }
-
-    .item-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 5px;
-    }
-
-    .tag {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-weight: 500;
-    }
-
-    .tag.category {
-      background: #e5f0ff;
-      color: #007aff;
-    }
-
-    .tag.time {
-      background: #fff3e0;
-      color: #e65100;
-    }
-
-    .tag.notify {
-      background: #e8f5e9;
-      color: #2e7d32;
-    }
+    .tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
+    .tag.category { background: #e5f0ff; color: #007aff; }
+    .tag.time { background: #fff3e0; color: #e65100; }
+    .tag.notify { background: #e8f5e9; color: #2e7d32; }
 
     .item-delete {
       background: none;
@@ -262,11 +286,7 @@
 
     .item-delete:active { color: #ff3b30; }
 
-    .tabs {
-      display: flex;
-      gap: 8px;
-      margin: 0 16px 14px;
-    }
+    .tabs { display: flex; gap: 8px; margin: 0 16px 14px; }
 
     .tab {
       flex: 1;
@@ -281,74 +301,144 @@
       transition: all 0.15s;
     }
 
-    .tab.active {
-      background: #007aff;
-      color: #fff;
-    }
+    .tab.active { background: #007aff; color: #fff; }
+
+    /* 用戶主題色 */
+    body.user-ken button.add-btn,
+    body.user-ken .tab.active { background: #007aff; }
+
+    body.user-vanessa button.add-btn,
+    body.user-vanessa .tab.active { background: #ff2d55; }
+
+    body.user-vanessa .field input:focus,
+    body.user-vanessa .field select:focus { border-color: #ff2d55; }
   </style>
 </head>
 <body>
 
-<header>
+<!-- 用戶選擇頁面 -->
+<div id="userScreen">
   <h1>📋 待辦清單</h1>
-  <p>買嘢 · 事項 · 提醒</p>
-</header>
-
-<div class="add-section">
-  <h2>新增項目</h2>
-
-  <div class="field">
-    <label>標題</label>
-    <input type="text" id="titleInput" placeholder="例：買牛奶、交功課…" />
+  <p>請選擇你係邊位</p>
+  <div class="user-buttons">
+    <button class="user-btn ken" onclick="selectUser('Ken')">
+      <div class="avatar">👨</div>
+      Ken
+    </button>
+    <button class="user-btn vanessa" onclick="selectUser('Vanessa')">
+      <div class="avatar">👩</div>
+      Vanessa
+    </button>
   </div>
-
-  <div class="row">
-    <div class="field">
-      <label>分類</label>
-      <select id="catInput">
-        <option value="購物">🛒 購物</option>
-        <option value="功課">📚 功課</option>
-        <option value="工作">💼 工作</option>
-        <option value="其他">📌 其他</option>
-      </select>
-    </div>
-    <div class="field">
-      <label>提醒日期</label>
-      <input type="date" id="dateInput" />
-    </div>
-  </div>
-
-  <div class="field">
-    <label>提醒時間（會喺前30分鐘通知）</label>
-    <input type="time" id="timeInput" />
-  </div>
-
-  <button class="add-btn" onclick="addItem()">＋ 加入清單</button>
-
-  <button class="notify-btn" onclick="requestNotify()">🔔 開啟通知權限</button>
-  <div class="notify-status" id="notifyStatus">狀態：未知</div>
 </div>
 
-<div class="tabs">
-  <button class="tab active" onclick="switchTab('pending', this)">待辦</button>
-  <button class="tab" onclick="switchTab('done', this)">已完成</button>
-</div>
+<!-- 主頁面 -->
+<div id="mainScreen">
+  <header>
+    <div class="header-left">
+      <h1 id="headerTitle">📋 待辦清單</h1>
+      <p>買嘢 · 事項 · 提醒</p>
+    </div>
+    <button class="switch-user-btn" onclick="switchUser()">切換用戶</button>
+  </header>
 
-<div class="list-section">
-  <div class="list-header">
-    <h2 id="tabTitle">待辦事項</h2>
-    <span id="countLabel"></span>
+  <div class="add-section">
+    <h2>新增項目</h2>
+
+    <div class="field">
+      <label>標題</label>
+      <input type="text" id="titleInput" placeholder="例：買牛奶、交功課…" />
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label>分類</label>
+        <select id="catInput">
+          <option value="購物">🛒 購物</option>
+          <option value="功課">📚 功課</option>
+          <option value="工作">💼 工作</option>
+          <option value="其他">📌 其他</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>提醒日期</label>
+        <input type="date" id="dateInput" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label>提醒時間（會喺前30分鐘通知）</label>
+      <input type="time" id="timeInput" />
+    </div>
+
+    <button class="add-btn" onclick="addItem()">＋ 加入清單</button>
+
+    <button class="notify-btn" onclick="requestNotify()">🔔 開啟通知權限</button>
+    <div class="notify-status" id="notifyStatus">狀態：未知</div>
   </div>
-  <div id="itemList"></div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('pending', this)">待辦</button>
+    <button class="tab" onclick="switchTab('done', this)">已完成</button>
+  </div>
+
+  <div class="list-section">
+    <div class="list-header">
+      <h2 id="tabTitle">待辦事項</h2>
+      <span id="countLabel"></span>
+    </div>
+    <div id="itemList"></div>
+  </div>
 </div>
 
 <script>
-  let items = JSON.parse(localStorage.getItem('todoItems') || '[]');
+  let currentUser = null;
+  let items = [];
   let currentTab = 'pending';
   let timers = {};
 
+  function getStorageKey() {
+    return 'todoItems_' + currentUser;
+  }
+
   function save() {
-    localStorage.setItem('todoItems', JSON.stringify(items));
+    localStorage.setItem(getStorageKey(), JSON.stringify(items));
+  }
+
+  function selectUser(name) {
+    currentUser = name;
+    items = JSON.parse(localStorage.getItem(getStorageKey()) || '[]');
+
+    document.getElementById('userScreen').style.display = 'none';
+    document.getElementById('mainScreen').style.display = 'block';
+    document.getElementById('headerTitle').textContent = '📋 ' + name + ' 嘅清單';
+
+    document.body.className = 'user-' + name.toLowerCase();
+
+    updateNotifyStatus();
+    rescheduleAll();
+    render();
+    document.getElementById('dateInput').valueAsDate = new Date();
+  }
+
+  function switchUser() {
+    // 清除計時器
+    Object.values(timers).forEach(t => clearTimeout(t));
+    timers = {};
+
+    currentUser = null;
+    items = [];
+    currentTab = 'pending';
+    document.body.className = '';
+
+    document.getElementById('mainScreen').style.display = 'none';
+    document.getElementById('userScreen').style.display = 'flex';
+
+    // 重置 tab
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      t.classList.toggle('active', i === 0);
+    });
+    document.getElementById('tabTitle').textContent = '待辦事項';
   }
 
   function addItem() {
@@ -357,10 +447,7 @@
     const date = document.getElementById('dateInput').value;
     const time = document.getElementById('timeInput').value;
 
-    if (!title) {
-      alert('請輸入標題！');
-      return;
-    }
+    if (!title) { alert('請輸入標題！'); return; }
 
     const item = {
       id: Date.now(),
@@ -384,11 +471,7 @@
 
   function toggleDone(id) {
     const item = items.find(i => i.id === id);
-    if (item) {
-      item.done = !item.done;
-      save();
-      render();
-    }
+    if (item) { item.done = !item.done; save(); render(); }
   }
 
   function deleteItem(id) {
@@ -409,7 +492,6 @@
   function render() {
     const list = document.getElementById('itemList');
     const filtered = items.filter(i => currentTab === 'pending' ? !i.done : i.done);
-
     document.getElementById('countLabel').textContent = filtered.length + ' 項';
 
     if (filtered.length === 0) {
@@ -446,25 +528,19 @@
 
     const eventTime = new Date(item.date + 'T' + item.time);
     const notifyTime = new Date(eventTime.getTime() - 30 * 60 * 1000);
-    const now = new Date();
-    const delay = notifyTime - now;
-
+    const delay = notifyTime - new Date();
     if (delay <= 0) return;
 
     if (timers[item.id]) clearTimeout(timers[item.id]);
-
     timers[item.id] = setTimeout(() => {
-      new Notification('⏰ 待辦提醒', {
-        body: `「${item.title}」將喺30分鐘後到期！`,
-        icon: '📋'
+      new Notification('⏰ ' + currentUser + ' 嘅提醒', {
+        body: `「${item.title}」將喺30分鐘後到期！`
       });
     }, delay);
   }
 
   function rescheduleAll() {
-    items.forEach(item => {
-      if (!item.done) scheduleNotification(item);
-    });
+    items.forEach(item => { if (!item.done) scheduleNotification(item); });
   }
 
   async function requestNotify() {
@@ -474,9 +550,7 @@
     }
     const result = await Notification.requestPermission();
     updateNotifyStatus();
-    if (result === 'granted') {
-      rescheduleAll();
-    }
+    if (result === 'granted') rescheduleAll();
   }
 
   function updateNotifyStatus() {
@@ -491,14 +565,6 @@
       el.textContent = '狀態：請撳上面按鈕開啟通知';
     }
   }
-
-  // Init
-  updateNotifyStatus();
-  rescheduleAll();
-  render();
-
-  // Set default date to today
-  document.getElementById('dateInput').valueAsDate = new Date();
 </script>
 
 </body>
