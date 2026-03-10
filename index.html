@@ -16,7 +16,6 @@
       min-height: 100vh;
     }
 
-    /* ── 用戶選擇頁面 ── */
     #userScreen {
       display: flex;
       flex-direction: column;
@@ -26,17 +25,8 @@
       padding: 32px 24px;
     }
 
-    #userScreen h1 {
-      font-size: 30px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    #userScreen p {
-      color: #8e8e93;
-      font-size: 15px;
-      margin-bottom: 40px;
-    }
+    #userScreen h1 { font-size: 30px; font-weight: 700; margin-bottom: 8px; }
+    #userScreen p { color: #8e8e93; font-size: 15px; margin-bottom: 40px; }
 
     .user-buttons {
       display: flex;
@@ -60,29 +50,17 @@
     }
 
     .user-btn:active { transform: scale(0.97); opacity: 0.85; }
-
-    .user-btn.ken {
-      background: #007aff;
-      color: #fff;
-    }
-
-    .user-btn.vanessa {
-      background: #ff2d55;
-      color: #fff;
-    }
+    .user-btn.ken { background: #007aff; color: #fff; }
+    .user-btn.vanessa { background: #ff2d55; color: #fff; }
 
     .user-btn .avatar {
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       border-radius: 50%;
       background: rgba(255,255,255,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 22px;
     }
 
-    /* ── 主頁面 ── */
     #mainScreen { display: none; }
 
     header {
@@ -97,17 +75,8 @@
       justify-content: space-between;
     }
 
-    .header-left h1 {
-      font-size: 26px;
-      font-weight: 700;
-      color: #1c1c1e;
-    }
-
-    .header-left p {
-      font-size: 13px;
-      color: #8e8e93;
-      margin-top: 2px;
-    }
+    .header-left h1 { font-size: 26px; font-weight: 700; }
+    .header-left p { font-size: 13px; color: #8e8e93; margin-top: 2px; }
 
     .switch-user-btn {
       background: #f2f2f7;
@@ -121,7 +90,12 @@
       margin-top: 4px;
     }
 
-    .switch-user-btn:active { opacity: 0.7; }
+    .sync-status {
+      font-size: 11px;
+      color: #8e8e93;
+      margin-top: 3px;
+      text-align: right;
+    }
 
     .add-section {
       background: #fff;
@@ -131,13 +105,7 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
 
-    .add-section h2 {
-      font-size: 15px;
-      font-weight: 600;
-      color: #3a3a3c;
-      margin-bottom: 12px;
-    }
-
+    .add-section h2 { font-size: 15px; font-weight: 600; color: #3a3a3c; margin-bottom: 12px; }
     .field { margin-bottom: 10px; }
 
     .field label {
@@ -162,10 +130,7 @@
       -webkit-appearance: none;
     }
 
-    .field input:focus, .field select:focus {
-      border-color: #007aff;
-      background: #fff;
-    }
+    .field input:focus, .field select:focus { border-color: #007aff; background: #fff; }
 
     .row { display: flex; gap: 10px; }
     .row .field { flex: 1; }
@@ -185,28 +150,13 @@
     }
 
     button.add-btn:active { opacity: 0.75; }
-
-    .notify-btn {
-      width: 100%;
-      padding: 11px;
-      background: #34c759;
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 600;
-      margin-top: 10px;
-      cursor: pointer;
-      transition: opacity 0.15s;
-    }
-
-    .notify-btn:active { opacity: 0.75; }
+    button.add-btn:disabled { opacity: 0.4; }
 
     .notify-status {
       font-size: 12px;
       color: #8e8e93;
       text-align: center;
-      margin-top: 6px;
+      margin-top: 10px;
     }
 
     .list-section { margin: 0 16px 30px; }
@@ -222,12 +172,7 @@
     .list-header h2 { font-size: 17px; font-weight: 600; }
     .list-header span { font-size: 13px; color: #8e8e93; }
 
-    .empty {
-      text-align: center;
-      color: #aeaeb2;
-      padding: 40px 20px;
-      font-size: 15px;
-    }
+    .empty { text-align: center; color: #aeaeb2; padding: 40px 20px; font-size: 15px; }
 
     .item {
       background: #fff;
@@ -245,16 +190,13 @@
     .item.done .item-title { text-decoration: line-through; color: #8e8e93; }
 
     .item-check {
-      width: 24px;
-      height: 24px;
+      width: 24px; height: 24px;
       border-radius: 50%;
       border: 2px solid #d1d1d6;
       background: #fff;
       flex-shrink: 0;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       margin-top: 1px;
       transition: all 0.15s;
     }
@@ -265,7 +207,6 @@
 
     .item-body { flex: 1; min-width: 0; }
     .item-title { font-size: 16px; font-weight: 500; word-break: break-word; }
-
     .item-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
 
     .tag { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500; }
@@ -274,14 +215,10 @@
     .tag.notify { background: #e8f5e9; color: #2e7d32; }
 
     .item-delete {
-      background: none;
-      border: none;
-      color: #aeaeb2;
-      font-size: 20px;
-      cursor: pointer;
-      padding: 0 0 0 4px;
-      line-height: 1;
-      flex-shrink: 0;
+      background: none; border: none;
+      color: #aeaeb2; font-size: 20px;
+      cursor: pointer; padding: 0 0 0 4px;
+      line-height: 1; flex-shrink: 0;
     }
 
     .item-delete:active { color: #ff3b30; }
@@ -289,31 +226,18 @@
     .tabs { display: flex; gap: 8px; margin: 0 16px 14px; }
 
     .tab {
-      flex: 1;
-      padding: 8px;
-      border: none;
-      border-radius: 10px;
-      background: #e5e5ea;
-      color: #3a3a3c;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s;
+      flex: 1; padding: 8px; border: none;
+      border-radius: 10px; background: #e5e5ea;
+      color: #3a3a3c; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s;
     }
 
     .tab.active { background: #007aff; color: #fff; }
 
-    /* 用戶主題色 */
-    body.user-ken button.add-btn,
-    body.user-ken .tab.active { background: #007aff; }
+    body.user-ken button.add-btn, body.user-ken .tab.active { background: #007aff; }
+    body.user-vanessa button.add-btn, body.user-vanessa .tab.active { background: #ff2d55; }
+    body.user-vanessa .field input:focus, body.user-vanessa .field select:focus { border-color: #ff2d55; }
 
-    body.user-vanessa button.add-btn,
-    body.user-vanessa .tab.active { background: #ff2d55; }
-
-    body.user-vanessa .field input:focus,
-    body.user-vanessa .field select:focus { border-color: #ff2d55; }
-
-    /* 提醒橫幅 */
     #alertBanner {
       display: none;
       position: fixed;
@@ -321,41 +245,142 @@
       z-index: 999;
       background: #ff9500;
       color: #fff;
-      padding: 16px 16px 16px 16px;
+      padding: 16px;
       box-shadow: 0 2px 12px rgba(0,0,0,0.2);
     }
 
     #alertBanner .alert-inner {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      max-width: 480px;
-      margin: 0 auto;
+      display: flex; align-items: flex-start; gap: 10px;
+      max-width: 480px; margin: 0 auto;
     }
 
     #alertBanner .alert-icon { font-size: 22px; flex-shrink: 0; }
-
     #alertBanner .alert-text { flex: 1; }
     #alertBanner .alert-title { font-weight: 700; font-size: 15px; }
     #alertBanner .alert-body { font-size: 13px; margin-top: 2px; opacity: 0.9; }
 
     #alertBanner .alert-close {
-      background: rgba(255,255,255,0.25);
-      border: none;
-      color: #fff;
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      flex-shrink: 0;
-      margin-top: 2px;
+      background: rgba(255,255,255,0.25); border: none;
+      color: #fff; border-radius: 8px;
+      padding: 4px 10px; font-size: 13px; font-weight: 600;
+      cursor: pointer; flex-shrink: 0; margin-top: 2px;
     }
+
+    .loading {
+      text-align: center; color: #8e8e93;
+      padding: 30px; font-size: 14px;
+    }
+
+    /* ── 日曆 ── */
+    #calendarSection { display: none; margin: 0 16px 30px; }
+
+    .cal-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px; padding: 0 4px;
+    }
+
+    .cal-nav h2 { font-size: 17px; font-weight: 600; }
+
+    .cal-nav button {
+      background: #e5e5ea; border: none;
+      border-radius: 8px; padding: 6px 14px;
+      font-size: 16px; cursor: pointer;
+    }
+
+    .cal-grid {
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .cal-weekdays {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      background: #f2f2f7;
+    }
+
+    .cal-weekdays span {
+      text-align: center; padding: 8px 0;
+      font-size: 12px; font-weight: 600; color: #8e8e93;
+    }
+
+    .cal-weekdays span:first-child { color: #ff3b30; }
+    .cal-weekdays span:last-child { color: #007aff; }
+
+    .cal-days {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+    }
+
+    .cal-day {
+      min-height: 56px;
+      padding: 6px 4px;
+      border-top: 1px solid #f2f2f7;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .cal-day:nth-child(7n+1) .cal-day-num { color: #ff3b30; }
+    .cal-day:nth-child(7n) .cal-day-num { color: #007aff; }
+
+    .cal-day-num {
+      font-size: 14px; font-weight: 500;
+      text-align: center; margin-bottom: 3px;
+    }
+
+    .cal-day.other-month .cal-day-num { color: #c7c7cc; }
+
+    .cal-day.today .cal-day-num {
+      background: #007aff; color: #fff !important;
+      border-radius: 50%;
+      width: 24px; height: 24px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 3px;
+    }
+
+    .cal-dots {
+      display: flex; flex-wrap: wrap;
+      justify-content: center; gap: 2px;
+    }
+
+    .cal-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #007aff;
+    }
+
+    .cal-detail {
+      background: #fff;
+      border-radius: 14px;
+      margin-top: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+
+    .cal-detail h3 {
+      font-size: 15px; font-weight: 600;
+      margin-bottom: 10px; color: #3a3a3c;
+    }
+
+    .cal-detail-item {
+      display: flex; align-items: center;
+      gap: 10px; padding: 8px 0;
+      border-bottom: 1px solid #f2f2f7;
+    }
+
+    .cal-detail-item:last-child { border-bottom: none; }
+
+    .cal-detail-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%; flex-shrink: 0;
+    }
+
+    .cal-detail-title { font-size: 14px; flex: 1; }
+    .cal-detail-time { font-size: 12px; color: #8e8e93; }
+    .cal-detail-cat { font-size: 11px; color: #007aff; }
   </style>
 </head>
 <body>
 
-<!-- 提醒橫幅 -->
 <div id="alertBanner">
   <div class="alert-inner">
     <div class="alert-icon">⏰</div>
@@ -367,47 +392,46 @@
   </div>
 </div>
 
-<!-- 用戶選擇頁面 -->
 <div id="userScreen">
   <h1>📋 待辦清單</h1>
   <p>請選擇你係邊位</p>
   <div class="user-buttons">
     <button class="user-btn ken" onclick="selectUser('Ken')">
-      <div class="avatar">👨</div>
-      Ken
+      <div class="avatar">👨</div>Ken
     </button>
     <button class="user-btn vanessa" onclick="selectUser('Vanessa')">
-      <div class="avatar">👩</div>
-      Vanessa
+      <div class="avatar">👩</div>Vanessa
     </button>
   </div>
 </div>
 
-<!-- 主頁面 -->
 <div id="mainScreen">
   <header>
     <div class="header-left">
       <h1 id="headerTitle">📋 待辦清單</h1>
-      <p>買嘢 · 事項 · 提醒</p>
+      <p></p>
     </div>
-    <button class="switch-user-btn" onclick="switchUser()">切換用戶</button>
+    <div>
+      <button class="switch-user-btn" onclick="switchUser()">切換用戶</button>
+      <div class="sync-status" id="syncStatus">🔄 連接中…</div>
+    </div>
   </header>
 
   <div class="add-section">
     <h2>新增項目</h2>
-
     <div class="field">
       <label>標題</label>
-      <input type="text" id="titleInput" placeholder="例：買牛奶、交功課…" />
+      <input type="text" id="titleInput" placeholder="" />
     </div>
-
     <div class="row">
       <div class="field">
         <label>分類</label>
         <select id="catInput">
           <option value="購物">🛒 購物</option>
-          <option value="功課">📚 功課</option>
           <option value="工作">💼 工作</option>
+          <option value="娛樂">🎬 娛樂</option>
+          <option value="旅遊">✈️ 旅遊</option>
+          <option value="汽車">🚗 汽車</option>
           <option value="其他">📌 其他</option>
         </select>
       </div>
@@ -416,128 +440,154 @@
         <input type="date" id="dateInput" />
       </div>
     </div>
-
     <div class="field">
       <label>提醒時間（會喺前30分鐘通知）</label>
       <input type="time" id="timeInput" />
     </div>
-
-    <button class="add-btn" onclick="addItem()">＋ 加入清單</button>
-
-    <div class="notify-status" id="notifyStatus">⏰ 保持網頁開住，到時會自動彈出提醒</div>
+    <button class="add-btn" id="addBtn" onclick="addItem()">＋ 加入清單</button>
+    <div class="notify-status">⏰ 保持網頁開住，到時會自動彈出提醒</div>
   </div>
 
   <div class="tabs">
     <button class="tab active" onclick="switchTab('pending', this)">待辦</button>
     <button class="tab" onclick="switchTab('done', this)">已完成</button>
+    <button class="tab" onclick="switchTab('calendar', this)">📅 日曆</button>
   </div>
 
-  <div class="list-section">
+  <div class="list-section" id="listSection">
     <div class="list-header">
       <h2 id="tabTitle">待辦事項</h2>
       <span id="countLabel"></span>
     </div>
-    <div id="itemList"></div>
+    <div id="itemList"><div class="loading">載入中…</div></div>
+  </div>
+
+  <div id="calendarSection">
+    <div class="cal-nav">
+      <button onclick="calPrev()">‹</button>
+      <h2 id="calTitle"></h2>
+      <button onclick="calNext()">›</button>
+    </div>
+    <div class="cal-grid">
+      <div class="cal-weekdays">
+        <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
+      </div>
+      <div class="cal-days" id="calDays"></div>
+    </div>
+    <div class="cal-detail" id="calDetail" style="display:none"></div>
   </div>
 </div>
 
-<script>
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
+  import {
+    getFirestore, collection, onSnapshot,
+    addDoc, updateDoc, deleteDoc, doc, serverTimestamp, query, orderBy
+  } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA1N5Mykgh7QaIhkOBZM0Y7wh9ecU4rsLM",
+    authDomain: "myhome-todo.firebaseapp.com",
+    projectId: "myhome-todo",
+    storageBucket: "myhome-todo.firebasestorage.app",
+    messagingSenderId: "1060767881507",
+    appId: "1:1060767881507:web:3b5838b7f96b4b6e919496"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
   let currentUser = null;
-  let items = [];
   let currentTab = 'pending';
+  let items = [];
   let timers = {};
+  let unsubscribe = null;
 
-  function getStorageKey() {
-    return 'todoItems_' + currentUser;
-  }
-
-  function save() {
-    localStorage.setItem(getStorageKey(), JSON.stringify(items));
-  }
-
-  function selectUser(name) {
+  window.selectUser = function(name) {
     currentUser = name;
-    items = JSON.parse(localStorage.getItem(getStorageKey()) || '[]');
-
     document.getElementById('userScreen').style.display = 'none';
     document.getElementById('mainScreen').style.display = 'block';
     document.getElementById('headerTitle').textContent = '📋 ' + name + ' 嘅清單';
-
     document.body.className = 'user-' + name.toLowerCase();
-
-    updateNotifyStatus();
-    rescheduleAll();
-    render();
     document.getElementById('dateInput').valueAsDate = new Date();
-  }
 
-  function switchUser() {
-    // 清除計時器
+    // 監聽 Firestore 實時更新
+    const q = query(collection(db, 'users', name, 'items'), orderBy('created', 'desc'));
+    unsubscribe = onSnapshot(q, (snapshot) => {
+      items = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      render();
+      rescheduleAll();
+      document.getElementById('syncStatus').textContent = '☁️ 已同步';
+    }, () => {
+      document.getElementById('syncStatus').textContent = '⚠️ 離線';
+    });
+  };
+
+  window.switchUser = function() {
+    if (unsubscribe) { unsubscribe(); unsubscribe = null; }
     Object.values(timers).forEach(t => clearTimeout(t));
     timers = {};
-
     currentUser = null;
     items = [];
     currentTab = 'pending';
     document.body.className = '';
-
     document.getElementById('mainScreen').style.display = 'none';
     document.getElementById('userScreen').style.display = 'flex';
-
-    // 重置 tab
-    document.querySelectorAll('.tab').forEach((t, i) => {
-      t.classList.toggle('active', i === 0);
-    });
+    document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === 0));
     document.getElementById('tabTitle').textContent = '待辦事項';
-  }
+  };
 
-  function addItem() {
+  window.addItem = async function() {
     const title = document.getElementById('titleInput').value.trim();
     const cat = document.getElementById('catInput').value;
     const date = document.getElementById('dateInput').value;
     const time = document.getElementById('timeInput').value;
-
     if (!title) { alert('請輸入標題！'); return; }
 
-    const item = {
-      id: Date.now(),
-      title,
-      category: cat,
+    const btn = document.getElementById('addBtn');
+    btn.disabled = true;
+
+    await addDoc(collection(db, 'users', currentUser, 'items'), {
+      title, category: cat,
       date: date || null,
       time: time || null,
       done: false,
-      created: new Date().toISOString()
-    };
+      created: serverTimestamp()
+    });
 
-    items.unshift(item);
-    save();
-    render();
-    scheduleNotification(item);
-
+    btn.disabled = false;
     document.getElementById('titleInput').value = '';
     document.getElementById('dateInput').value = '';
     document.getElementById('timeInput').value = '';
-  }
+  };
 
-  function toggleDone(id) {
+  window.toggleDone = async function(id) {
     const item = items.find(i => i.id === id);
-    if (item) { item.done = !item.done; save(); render(); }
-  }
+    if (item) {
+      await updateDoc(doc(db, 'users', currentUser, 'items', id), { done: !item.done });
+    }
+  };
 
-  function deleteItem(id) {
+  window.deleteItem = async function(id) {
     if (timers[id]) { clearTimeout(timers[id]); delete timers[id]; }
-    items = items.filter(i => i.id !== id);
-    save();
-    render();
-  }
+    await deleteDoc(doc(db, 'users', currentUser, 'items', id));
+  };
 
-  function switchTab(tab, btn) {
+  window.switchTab = function(tab, btn) {
     currentTab = tab;
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('tabTitle').textContent = tab === 'pending' ? '待辦事項' : '已完成';
-    render();
-  }
+    const isCalendar = tab === 'calendar';
+    document.getElementById('listSection').style.display = isCalendar ? 'none' : 'block';
+    document.getElementById('calendarSection').style.display = isCalendar ? 'block' : 'none';
+    if (isCalendar) {
+      renderCalendar();
+    } else {
+      document.getElementById('tabTitle').textContent = tab === 'pending' ? '待辦事項' : '已完成';
+      render();
+    }
+  };
 
   function render() {
     const list = document.getElementById('itemList');
@@ -550,8 +600,8 @@
     }
 
     list.innerHTML = filtered.map(item => `
-      <div class="item ${item.done ? 'done' : ''}" id="item-${item.id}">
-        <div class="item-check" onclick="toggleDone(${item.id})">
+      <div class="item ${item.done ? 'done' : ''}">
+        <div class="item-check" onclick="toggleDone('${item.id}')">
           <svg width="13" height="10" viewBox="0 0 13 10" fill="none">
             <path d="M1 5L5 9L12 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -563,7 +613,7 @@
             ${item.date && item.time ? `<span class="tag time">⏰ ${item.date} ${item.time}</span><span class="tag notify">提前30分鐘通知</span>` : item.date ? `<span class="tag time">📅 ${item.date}</span>` : ''}
           </div>
         </div>
-        <button class="item-delete" onclick="deleteItem(${item.id})">×</button>
+        <button class="item-delete" onclick="deleteItem('${item.id}')">×</button>
       </div>
     `).join('');
   }
@@ -574,12 +624,9 @@
 
   function scheduleNotification(item) {
     if (!item.date || !item.time) return;
-
     const eventTime = new Date(item.date + 'T' + item.time);
-    const notifyTime = new Date(eventTime.getTime() - 30 * 60 * 1000);
-    const delay = notifyTime - new Date();
+    const delay = eventTime - 30 * 60 * 1000 - new Date();
     if (delay <= 0) return;
-
     if (timers[item.id]) clearTimeout(timers[item.id]);
     timers[item.id] = setTimeout(() => {
       showAlert(currentUser + ' 嘅提醒', '「' + item.title + '」將喺30分鐘後到期！');
@@ -587,21 +634,116 @@
   }
 
   function rescheduleAll() {
+    Object.values(timers).forEach(t => clearTimeout(t));
+    timers = {};
     items.forEach(item => { if (!item.done) scheduleNotification(item); });
   }
 
-  function showAlert(title, body) {
+  window.showAlert = function(title, body) {
     document.getElementById('alertTitle').textContent = title;
     document.getElementById('alertBody').textContent = body;
-    const banner = document.getElementById('alertBanner');
-    banner.style.display = 'block';
-    // 震動（Android 支援）
+    document.getElementById('alertBanner').style.display = 'block';
     if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
+  };
+
+  window.closeAlert = function() {
+    document.getElementById('alertBanner').style.display = 'none';
+  };
+
+  // ── 日曆 ──
+  const catColors = {
+    '購物': '#007aff', '工作': '#ff9500', '娛樂': '#af52de',
+    '旅遊': '#34c759', '汽車': '#ff3b30', '其他': '#8e8e93'
+  };
+
+  let calYear = new Date().getFullYear();
+  let calMonth = new Date().getMonth();
+
+  function renderCalendar() {
+    const monthNames = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    document.getElementById('calTitle').textContent = calYear + '年 ' + monthNames[calMonth];
+
+    const firstDay = new Date(calYear, calMonth, 1).getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const daysInPrev = new Date(calYear, calMonth, 0).getDate();
+    const today = new Date();
+
+    // 建立日期→事項 map
+    const itemMap = {};
+    items.forEach(item => {
+      if (item.date) {
+        if (!itemMap[item.date]) itemMap[item.date] = [];
+        itemMap[item.date].push(item);
+      }
+    });
+
+    let html = '';
+    let totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+
+    for (let i = 0; i < totalCells; i++) {
+      let dayNum, dateStr, isOther = false;
+      if (i < firstDay) {
+        dayNum = daysInPrev - firstDay + i + 1;
+        const m = String(calMonth).padStart(2,'0') || '12';
+        const y = calMonth === 0 ? calYear - 1 : calYear;
+        const mo = calMonth === 0 ? 12 : calMonth;
+        dateStr = y + '-' + String(mo).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+        isOther = true;
+      } else if (i >= firstDay + daysInMonth) {
+        dayNum = i - firstDay - daysInMonth + 1;
+        const y = calMonth === 11 ? calYear + 1 : calYear;
+        const mo = calMonth === 11 ? 1 : calMonth + 2;
+        dateStr = y + '-' + String(mo).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+        isOther = true;
+      } else {
+        dayNum = i - firstDay + 1;
+        dateStr = calYear + '-' + String(calMonth + 1).padStart(2,'0') + '-' + String(dayNum).padStart(2,'0');
+      }
+
+      const isToday = today.getFullYear() === calYear && today.getMonth() === calMonth && today.getDate() === dayNum && !isOther;
+      const dayItems = itemMap[dateStr] || [];
+      const dots = dayItems.slice(0,3).map(it => `<div class="cal-dot" style="background:${catColors[it.category]||'#8e8e93'}"></div>`).join('');
+
+      html += `<div class="cal-day${isOther?' other-month':''}${isToday?' today':''}" onclick="showCalDetail('${dateStr}')">
+        <div class="cal-day-num">${dayNum}</div>
+        <div class="cal-dots">${dots}</div>
+      </div>`;
+    }
+
+    document.getElementById('calDays').innerHTML = html;
+    document.getElementById('calDetail').style.display = 'none';
   }
 
-  function closeAlert() {
-    document.getElementById('alertBanner').style.display = 'none';
-  }
+  window.showCalDetail = function(dateStr) {
+    const dayItems = items.filter(i => i.date === dateStr);
+    const detail = document.getElementById('calDetail');
+    if (dayItems.length === 0) { detail.style.display = 'none'; return; }
+
+    const parts = dateStr.split('-');
+    detail.innerHTML = `<h3>${parts[0]}年${parseInt(parts[1])}月${parseInt(parts[2])}日</h3>` +
+      dayItems.map(it => `
+        <div class="cal-detail-item">
+          <div class="cal-dot cal-detail-dot" style="background:${catColors[it.category]||'#8e8e93'}"></div>
+          <div style="flex:1">
+            <div class="cal-detail-title${it.done?' done':''}" style="${it.done?'text-decoration:line-through;color:#8e8e93':''}">${escHtml(it.title)}</div>
+            <div style="font-size:11px;color:#8e8e93;margin-top:2px">${it.category}${it.time ? ' · ' + it.time : ''}</div>
+          </div>
+        </div>
+      `).join('');
+    detail.style.display = 'block';
+  };
+
+  window.calPrev = function() {
+    calMonth--;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCalendar();
+  };
+
+  window.calNext = function() {
+    calMonth++;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCalendar();
+  };
 </script>
 
 </body>
