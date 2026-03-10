@@ -312,9 +312,60 @@
 
     body.user-vanessa .field input:focus,
     body.user-vanessa .field select:focus { border-color: #ff2d55; }
+
+    /* 提醒橫幅 */
+    #alertBanner {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      background: #ff9500;
+      color: #fff;
+      padding: 16px 16px 16px 16px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+
+    #alertBanner .alert-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    #alertBanner .alert-icon { font-size: 22px; flex-shrink: 0; }
+
+    #alertBanner .alert-text { flex: 1; }
+    #alertBanner .alert-title { font-weight: 700; font-size: 15px; }
+    #alertBanner .alert-body { font-size: 13px; margin-top: 2px; opacity: 0.9; }
+
+    #alertBanner .alert-close {
+      background: rgba(255,255,255,0.25);
+      border: none;
+      color: #fff;
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
   </style>
 </head>
 <body>
+
+<!-- 提醒橫幅 -->
+<div id="alertBanner">
+  <div class="alert-inner">
+    <div class="alert-icon">⏰</div>
+    <div class="alert-text">
+      <div class="alert-title" id="alertTitle"></div>
+      <div class="alert-body" id="alertBody"></div>
+    </div>
+    <button class="alert-close" onclick="closeAlert()">知道了</button>
+  </div>
+</div>
 
 <!-- 用戶選擇頁面 -->
 <div id="userScreen">
@@ -373,8 +424,7 @@
 
     <button class="add-btn" onclick="addItem()">＋ 加入清單</button>
 
-    <button class="notify-btn" onclick="requestNotify()">🔔 開啟通知權限</button>
-    <div class="notify-status" id="notifyStatus">狀態：未知</div>
+    <div class="notify-status" id="notifyStatus">⏰ 保持網頁開住，到時會自動彈出提醒</div>
   </div>
 
   <div class="tabs">
@@ -524,7 +574,6 @@
 
   function scheduleNotification(item) {
     if (!item.date || !item.time) return;
-    if (Notification.permission !== 'granted') return;
 
     const eventTime = new Date(item.date + 'T' + item.time);
     const notifyTime = new Date(eventTime.getTime() - 30 * 60 * 1000);
@@ -533,9 +582,7 @@
 
     if (timers[item.id]) clearTimeout(timers[item.id]);
     timers[item.id] = setTimeout(() => {
-      new Notification('⏰ ' + currentUser + ' 嘅提醒', {
-        body: `「${item.title}」將喺30分鐘後到期！`
-      });
+      showAlert(currentUser + ' 嘅提醒', '「' + item.title + '」將喺30分鐘後到期！');
     }, delay);
   }
 
@@ -543,27 +590,17 @@
     items.forEach(item => { if (!item.done) scheduleNotification(item); });
   }
 
-  async function requestNotify() {
-    if (!('Notification' in window)) {
-      document.getElementById('notifyStatus').textContent = '狀態：你嘅瀏覽器唔支援通知';
-      return;
-    }
-    const result = await Notification.requestPermission();
-    updateNotifyStatus();
-    if (result === 'granted') rescheduleAll();
+  function showAlert(title, body) {
+    document.getElementById('alertTitle').textContent = title;
+    document.getElementById('alertBody').textContent = body;
+    const banner = document.getElementById('alertBanner');
+    banner.style.display = 'block';
+    // 震動（Android 支援）
+    if (navigator.vibrate) navigator.vibrate([300, 100, 300]);
   }
 
-  function updateNotifyStatus() {
-    const el = document.getElementById('notifyStatus');
-    if (!('Notification' in window)) {
-      el.textContent = '狀態：唔支援通知';
-    } else if (Notification.permission === 'granted') {
-      el.textContent = '狀態：✅ 通知已開啟';
-    } else if (Notification.permission === 'denied') {
-      el.textContent = '狀態：❌ 通知已被拒絕（請喺設定入面手動開啟）';
-    } else {
-      el.textContent = '狀態：請撳上面按鈕開啟通知';
-    }
+  function closeAlert() {
+    document.getElementById('alertBanner').style.display = 'none';
   }
 </script>
 
